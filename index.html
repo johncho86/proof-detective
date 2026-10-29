@@ -92,6 +92,8 @@ h1,h2,h3{line-height:1.3}
 .steps li{padding:5px 12px;border-radius:8px;color:var(--muted);background:transparent;border:1px solid var(--line)}
 .steps li.now{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
 .steps li.done{background:var(--cobalt-soft);color:var(--cobalt);border-color:transparent}
+.steps.nav li{padding:0}
+.steps.nav button{display:block;min-width:40px;min-height:36px;padding:5px 12px;border:0;background:none;color:inherit;font:inherit;border-radius:8px}
 .strat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
 .strat button{min-height:64px;border-radius:14px;border:2px solid var(--line);background:var(--paper);font-size:17px;font-weight:700}
 .strat button[aria-pressed="true"]{border-color:var(--cobalt);background:var(--cobalt);color:var(--on-cobalt)}
@@ -603,7 +605,7 @@ function bindHomeFooter(){
 }
 function raceText(){ return '[삼단논법 게임] '+stamp()+'\n단서 확인 횟수: '+R.attempts+'회\n대우 도전: '+(R.cdone?'성공 (고르기 '+(R.cTries||1)+'회 만에)':'미완료'); }
 function puzzleText(){ return '['+(P.sess==='prev'?'퍼즐 1, 2, 3':'퍼즐 4, 5')+'] '+stamp()+'\n\n'+P.records.map(r=>r.label+' · '+r.strat+'\n- 내 설명: '+clip(r.why,200)+'\n- 제출 '+r.attempts+'회 · 힌트 '+r.hints+'회'+(r.traps.length?' · 걸린 함정: '+r.traps.map(t=>'“'+clip(t,40)+'”').join(', '):'')+'\n- 한 줄 정리: '+clip(r.summary,200)).join('\n\n'); }
-function adsText(){ return '[괴도의 광고 회사] '+stamp()+'\n첫 판정 점수: '+A.score+' / '+(ADS.length*2)+'\n'+A.log.map((x,i)=>'문장 '+(i+1)+' ('+x.type+'): '+(x.rel&&x.ver?'정확':'첫 판정 틀림')).join('\n')+((A.counters&&A.counters.length)?'\n\n내가 쓴 반례\n'+A.counters.map(c=>'- 문장 '+c.n+' ('+c.tries+'번째 제출에 인정): '+clip(c.text,150)).join('\n'):''); }
+function adsText(){ return '[괴도의 광고 회사] '+stamp()+'\n첫 판정 점수: '+A.score+' / '+(ADS.length*2)+'\n'+A.log.map((x,i)=>'문장 '+(i+1)+' ('+x.type+'): '+(x.rel&&x.ver?'정확':'첫 판정 틀림')).join('\n')+((A.counters&&A.counters.length)?'\n\n내가 쓴 반례\n'+A.counters.slice().sort((a,b)=>a.n-b.n).map(c=>'- 문장 '+c.n+' ('+c.tries+'번째 제출에 인정): '+clip(c.text,150)).join('\n'):''); }
 function bonusText(){ const b=A.bonus; return '[광고 회사 보너스] '+stamp()+'\n광고: '+clip(b.ad,120)+'\n내 판단: '+A.bRel+' / 괴도 해설: '+b.type+'\n내가 쓴 글: '+clip(A.bTxt,150)+'\n해설 검토: '+(A.bAgree==='ok'?'맞는 것 같다':'이상한 데가 있다')+' · '+clip(A.bWhy,150); }
 function caseText(){ return '[괴도 프루프 사건] '+stamp()+'\n모둠원: '+members().join(', ')+'\n'+['c1','c2'].map(k=>{ const v=G.solved[k]; return '사건 '+CASES[k].no+': '+(v?'심문 '+v.count+'회'+(v.keyLine?' · 결정적 한 마디('+v.keyLine.name+'): '+clip(v.keyLine.text,120):''):'도전 중'); }).join('\n')+(G.report?'\n\n'+reportText():''); }
 
@@ -807,6 +809,14 @@ const ADS_BONUS_FALLBACK={product:'반짝 형광펜', ad:'전교 1등 학생들�
 let A=null;
 function startAds(){ window.scrollTo(0,0); A={i:0,rel:null,ver:null,checked:false,cnt:'',cntDone:false,score:0,log:[],phase:'play',help:false,bonus:null,bRel:null,bCnt:'',bOpen:false,bAgree:null,bWhy:'',loading:false,bErr:''}; renderAds(); }
 const adsVerdict = it => it.type==='대우' ? '참' : '모름';
+// 문장마다 따로 저장하는 진행 상태. 상단 번호로 문장을 오갈 때 이 값들을 바꿔 끼운다.
+const ADS_Q_KEYS=['rel','ver','checked','cnt','cntDone','cntFb','busy','tries','wrongRel','wrongVer','retryMsg','cntTries'];
+const adsQBlank=()=>({rel:null,ver:null,checked:false,cnt:'',cntDone:false,cntFb:'',busy:false,tries:0,wrongRel:false,wrongVer:false,retryMsg:'',cntTries:0});
+function adsSaveQ(){ A.qs=A.qs||[]; const q={}; ADS_Q_KEYS.forEach(k=>q[k]=A[k]); A.qs[A.i]=q; }
+function adsQ(k){ return k===A.i ? A : ((A.qs&&A.qs[k])||adsQBlank()); }
+const adsQDone=k=>{ const q=adsQ(k); return !!q.checked && (adsVerdict(ADS[k])==='참' || !!q.cntDone); };
+const adsLeft=()=>ADS.map((x,k)=>k).filter(k=>!adsQDone(k));
+function adsGoto(k){ if(k===A.i||A.busy) return; adsSaveQ(); A.i=k; Object.assign(A,adsQBlank(),A.qs[k]||{}); window.scrollTo(0,0); renderAds(); }
 function adsHelpHTML(){
   return '<details class="panel helpbox" style="margin-top:14px"'+(A.help?' open':'')+' id="adsHelp"><summary style="cursor:pointer;font-weight:700">역과 대우 한눈에 보기</summary>'+
    '<table><tr><th>이름</th><th>모양 (원래 문장: p이면 q)</th><th>원래 문장이 참이면</th></tr>'+
@@ -851,7 +861,8 @@ function renderAdsPlay(){
   const it=ADS[A.i], ok=A.checked, relOK=A.rel===it.type, verOK=A.ver===adsVerdict(it);
   const relBtn=k=>{ let c=''; if(ok){ if(k===it.type) c='right'; else if(k===A.rel) c='wrong'; } else if(A.wrongRel && k===A.rel) c='wrong'; return '<button data-rel="'+k+'" aria-pressed="'+(A.rel===k)+'" class="'+c+'" '+(ok?'disabled':'')+'>'+REL_LABEL[k]+'</button>'; };
   const verBtn=(k,l)=>{ let c=''; if(ok){ if(k===adsVerdict(it)) c='right'; else if(k===A.ver) c='wrong'; } else if(A.wrongVer && k===A.ver) c='wrong'; return '<button data-ver="'+k+'" aria-pressed="'+(A.ver===k)+'" class="'+c+'" '+(ok?'disabled':'')+'>'+l+'</button>'; };
-  let h='<ol class="steps" aria-label="진행">'+ADS.map((x,k)=>'<li class="'+(k<A.i?'done':k===A.i?'now':'')+'">'+(k+1)+'</li>').join('')+'</ol>';
+  let h='<ol class="steps nav" aria-label="문장 번호 (눌러서 이동)">'+ADS.map((x,k)=>{ const d=adsQDone(k);
+    return '<li class="'+(k===A.i?'now':d?'done':'')+'"><button data-q="'+k+'"'+(k===A.i?' aria-current="step"':'')+' aria-label="문장 '+(k+1)+(d?' (완료)':'')+'">'+(k+1)+(d?' ✓':'')+'</button></li>'; }).join('')+'</ol>';
   h+='<section class="panel"><div class="row" style="justify-content:space-between"><span class="tag">괴도의 광고 회사 · 문장 '+(A.i+1)+' / '+ADS.length+'</span><span class="muted" style="font-size:14px">점수 '+A.score+' / '+(ADS.length*2)+'</span></div>'+
    '<div class="fact" style="margin-top:12px"><small>확실한 사실 (참인 문장)</small>'+esc(it.fact)+'</div>'+
    '<div class="claim-wrap"><div class="mini-thief">'+thiefSVG(ok?(relOK&&verOK?'rattled':'smug'):'smug')+'</div><div class="claim'+(it.ad?' ad':'')+'"><span class="lbl">'+(it.ad?'괴도 프루프의 광고':'괴도 프루프의 말')+'</span>'+esc(it.claim)+'</div></div>'+
@@ -871,7 +882,8 @@ function renderAdsPlay(){
       if(!A.cntDone) h+='<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="cntBtn" '+(A.busy||!A.cnt.trim()?'disabled':'')+'>'+(A.busy?'확인하는 중…':(A.cntTries?'다시 제출':'반례 제출'))+'</button><span class="muted" style="font-size:14px">반례가 인정되어야 다음으로 넘어갈 수 있어요.</span></div>';
       else h+='<div class="fb hint"><strong>예시 반례</strong><br>'+esc(it.counter)+'</div>';
     }
-    if(adsVerdict(it)==='참' || A.cntDone) h+='<div class="row" style="margin-top:14px"><button class="btn btn-primary btn-big" id="adNext">'+(A.i<ADS.length-1?'다음 문장':'결과 보기')+'</button></div>';
+    if(adsVerdict(it)==='참' || A.cntDone){ const left=adsLeft();
+      h+='<div class="row" style="margin-top:14px"><button class="btn btn-primary btn-big" id="adNext">'+(left.length?'다음 문장':'결과 보기')+'</button>'+(left.length?'<span class="muted" style="font-size:14px">아직 안 푼 문장: '+left.map(k=>k+1).join(', ')+'</span>':'')+'</div>'; }
   }
   h+='</section>'+adsHelpHTML();
   app.innerHTML=h;
@@ -881,7 +893,7 @@ function renderAdsPlay(){
   app.querySelectorAll('[data-ver]').forEach(b=>b.onclick=()=>{ if(A.ver!==b.dataset.ver){ A.ver=b.dataset.ver; A.wrongVer=false; } renderAds(); });
   if($('#adCheck')) $('#adCheck').onclick=()=>{
     A.tries=(A.tries||0)+1; const r=A.rel===it.type, v=A.ver===adsVerdict(it);
-    if(A.tries===1){ A.score+=(r?1:0)+(v?1:0); A.log.push({type:it.type, rel:r, ver:v}); }
+    if(A.tries===1){ A.score+=(r?1:0)+(v?1:0); A.log[A.i]={type:it.type, rel:r, ver:v}; }
     const good=r&&v;
     if(good){ A.checked=true; A.retryMsg=''; A.wrongRel=false; A.wrongVer=false; sfx.chime(); }
     else {
@@ -903,7 +915,10 @@ function renderAdsPlay(){
     const r=loc.ok?await checkCounter(it.fact,it.claim,A.cnt):loc;
     A.busy=false; A.cntFb=r.msg; if(r.ok){ A.cntDone=true; if(!A.cntFb||A.cntFb==='반례로 인정할게요.') A.cntFb='반례로 인정! 사실 문장은 지키면서 괴도의 말만 무너뜨렸어요.'; (A.counters=A.counters||[]).push({n:A.i+1,text:A.cnt,tries:A.cntTries}); sfx.chime(); speak('크윽, 그런 경우가 있었군!'); } else { sfx.buzz(); if(!A.cntFb) A.cntFb='괴도의 말이 틀리는 상황인지 다시 확인해 보세요.'; if(A.cntTries===1 && it.cx) A.cntFb+=' 한 번 더 틀리면 힌트가 나와요.'; }
     renderAds(); };
-  if($('#adNext')) $('#adNext').onclick=()=>{ if(A.i<ADS.length-1){ A.i++; A.rel=null; A.ver=null; A.checked=false; A.cnt=''; A.cntDone=false; A.cntFb=''; A.busy=false; A.tries=0; A.wrongRel=false; A.wrongVer=false; A.retryMsg=''; A.cntTries=0; window.scrollTo(0,0); renderAds(); } else { A.phase='end'; window.scrollTo(0,0); renderAds(); } };
+  app.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>adsGoto(+b.dataset.q));
+  if($('#adNext')) $('#adNext').onclick=()=>{ const left=adsLeft();
+    if(!left.length){ adsSaveQ(); A.phase='end'; window.scrollTo(0,0); renderAds(); return; }
+    adsGoto(left.find(k=>k>A.i) ?? left[0]); };
 }
 function renderAdsEnd(){
   const by=t=>{ const xs=A.log.filter(x=>x.type===t); return xs.filter(x=>x.rel&&x.ver).length+' / '+xs.length; };
