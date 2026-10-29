@@ -393,23 +393,21 @@ const PUZZLES = {
   absurd:{orders:[['as','c1','c2','ae1','ae2']], traps:{at1:'‘적어도 하나는 짝수’를 부정하면 ‘모두 홀수’예요. ‘적어도 하나가 홀수’는 부정이 아니에요.', at2:'귀류법은 가정 ‘a² + b² = c²’는 그대로 두고 결론만 부정해요.'},
    hints:['가정 ‘a² + b² = c²’은 그대로 두고, 결론 ‘적어도 하나는 짝수’만 부정해요.','모두 홀수라면 a² + b²과 c²은 각각 짝수일까요, 홀수일까요?']},
   summary:'‘적어도 하나는 짝수’를 부정하면 왜 ‘모두 홀수’가 될까요?'},
- p5:{label:'퍼즐 5', session:'open', statement:'실수 a, b에 대하여 ab < 9이면 a < 3 또는 b < 3이다.',
-  direct:'ab < 9에서 바로 a, b의 범위를 정하기는 어려워요. 대우나 귀류법을 골라 보세요.',
+ p5:{label:'퍼즐 5', session:'open', statement:'√3은 무리수이다.',
+  direct:'‘무리수이다’를 바로 보이기는 어려워요. 다른 방법을 골라 보세요.',
+  noContra:'이 명제는 ‘p이면 q’ 꼴이 아니라서 대우를 세우기 어려워요. 결론을 부정해서 출발하는 방법은 어떨까요?',
   cards:{
-   c1:'a ≥ 3 > 0, b ≥ 3 > 0이므로 두 부등식을 변끼리 곱할 수 있다.',
-   c2:'ab ≥ 3 × 3 = 9이다.',
-   ds:'주어진 명제의 대우 ‘a ≥ 3이고 b ≥ 3이면 ab ≥ 9이다’가 참임을 보이자.',
-   de2:'대우가 참이므로 주어진 명제도 참이다.',
-   dt1:'주어진 명제의 대우 ‘a ≥ 3 또는 b ≥ 3이면 ab ≥ 9이다’가 참임을 보이자.',
-   dt2:'주어진 명제의 역 ‘a < 3 또는 b < 3이면 ab < 9이다’가 참임을 보이자.',
-   as:'ab < 9인데 a ≥ 3이고 b ≥ 3이라고 가정하자.',
-   ae1:'이는 ab < 9라는 가정에 모순이다.', ae2:'따라서 a < 3 또는 b < 3이다.',
-   at1:'ab < 9인데 a ≥ 3 또는 b ≥ 3이라고 가정하자.', at2:'ab ≥ 9라고 가정하자.'},
-  contra:{orders:[['ds','c1','c2','de2']], traps:{dt1:'‘a < 3 또는 b < 3’을 부정하면 ‘a ≥ 3이고 b ≥ 3’이에요. ‘또는’은 ‘그리고’로 바뀌어야 해요.', dt2:'이 카드는 가정과 결론의 자리만 바꾼 ‘역’이에요.'},
-   hints:['‘a < 3 또는 b < 3’을 부정하면 ‘또는’이 무엇으로 바뀌나요?','a와 b가 모두 3 이상이면 ab는 얼마 이상일까요?']},
-  absurd:{orders:[['as','c1','c2','ae1','ae2']], traps:{at1:'‘a < 3 또는 b < 3’을 부정하면 ‘a ≥ 3이고 b ≥ 3’이에요. ‘또는’은 ‘그리고’로 바뀌어야 해요.', at2:'귀류법은 가정 ‘ab < 9’는 그대로 두고 결론만 부정해요.'},
-   hints:['가정 ‘ab < 9’는 그대로 두고, 결론 ‘a < 3 또는 b < 3’만 부정해요.','a ≥ 3, b ≥ 3이면 ab는 9보다 클까요, 작을까요? 그게 무엇과 부딪히나요?']},
-  summary:'‘a < 3 또는 b < 3’을 부정하면 왜 ‘a ≥ 3이고 b ≥ 3’이 될까요?'}
+   as:'√3이 유리수라고 가정하자.',
+   c1:'√3 = m/n (m, n은 서로소인 자연수)으로 나타낼 수 있다.',
+   c2:'양변을 제곱하여 정리하면 m² = 3n²이다.',
+   c3:'m²이 3의 배수이므로 m도 3의 배수이다. (퍼즐 2에서 증명한 사실)',
+   c4:'m = 3k (k는 자연수)를 대입하면 9k² = 3n², 즉 n² = 3k²이다.',
+   c5:'n²이 3의 배수이므로 n도 3의 배수이다.',
+   ae1:'m, n이 모두 3의 배수이므로 m, n이 서로소라는 가정에 모순이다.', ae2:'따라서 √3은 무리수이다.',
+   at1:'√3이 무리수라고 가정하자.', at2:'√3 = m/n (m, n은 자연수)으로 나타낼 수 있다.'},
+  absurd:{orders:[['as','c1','c2','c3','c4','c5','ae1','ae2']], traps:{at1:'결론 ‘√3은 무리수이다’를 부정하면 ‘√3은 유리수이다’예요. 이 카드는 결론을 부정하지 않았어요.', at2:'‘서로소’라는 조건이 빠졌어요. 이 조건이 없으면 마지막에 m, n이 모두 3의 배수여도 모순이 생기지 않아요.'},
+   hints:['귀류법은 결론을 부정해서 출발해요. ‘무리수이다’를 부정하면 무엇이 되나요?','m과 n이 둘 다 3의 배수가 되면, 처음에 m과 n에 붙여 둔 조건 중 무엇과 부딪히나요?']},
+  summary:'이 증명에서 ‘서로소’라는 조건이 왜 꼭 필요할까요?'}
 };
 const DEF_Q={contra:'대우를 이용한 증명법이 뭘까? 내 말로 설명해 보세요.', absurd:'귀류법이 뭘까? 내 말로 설명해 보세요.'};
 const DEF_PH={contra:'예: 원래 명제 대신 ○○을 증명해서, 원래 명제가 참임을 보이는 방법', absurd:'예: 결론을 ○○했을 때 ○○이 생기는 것을 보여서 증명하는 방법'};
@@ -437,7 +435,6 @@ const CASES = {
    {q:'내 증명에서 처음 틀린 줄은 몇 번째지?', o:['1번 줄','2번 줄','3번 줄','4번 줄'], a:0}],
   trick:'결론 ‘m 또는 n은 홀수’를 부정하면 ‘m과 n이 모두 짝수’인데, 괴도는 ‘또는’을 그대로 두었다. 그래서 괴도가 세운 대우는 거짓이다(반례: m = 2, n = 3).',
   fix:'올바른 대우는 ‘m과 n이 모두 짝수이면 m, n은 서로소가 아니다’이다. 둘 다 짝수이면 2가 공약수이므로 서로소가 아니고, 대우가 참이므로 주어진 명제도 참이다.',
-  key:'오류는 1번 줄이다. 결론 ‘m 또는 n은 홀수’의 부정은 ‘m과 n이 모두 짝수’인데 괴도는 ‘m 또는 n이 짝수’라고 썼다. 그래서 괴도의 대우는 거짓이다(반례 m=2, n=3: 서로소인데 m이 짝수). 2번 줄은 슬쩍 둘 다 짝수인 것처럼 썼다. 올바른 대우: ‘m과 n이 모두 짝수이면 m, n은 서로소가 아니다.’\n기준 point: 1번 줄(대우를 세운 줄)을 틀렸다고 지목.\n기준 reason: ‘또는’의 부정은 ‘그리고(모두)’라는 설명, 또는 m=2, n=3처럼 괴도의 대우가 거짓임을 보이는 올바른 반례.\n기준 fix: 올바른 대우 ‘m과 n이 모두 짝수이면 서로소가 아니다’를 제시.',
   local:{reason:/(그리고|모두|둘\s*다|이고|반례|m\s*=\s*2|2\s*[,와과]\s*3|서로소인데|또는의\s*부정|또는을\s*부정)/, fix:/(모두\s*짝수|둘\s*다\s*짝수|m과\s*n이\s*(모두\s*)?짝수이면|m\s*,\s*n이\s*모두\s*짝수)/,
    onPoint:'1번 줄이라고? 대우를 정확히 세웠을 뿐인데… 그게 왜 틀렸다는 거지?',
    onReason:'크윽… ‘또는’의 부정이라… 그, 그럼 대우를 어떻게 고쳐야 한다는 거냐?',
@@ -462,7 +459,6 @@ const CASES = {
    {q:'제대로 증명하려면 경우를 몇 가지로 나눠야 하지?', o:['1가지','2가지','3가지'], a:2}],
   trick:'결론 ‘a = 0이고 b = 0’의 부정은 ‘a ≠ 0 또는 b ≠ 0’이다. 괴도는 ‘a ≠ 0이고 b ≠ 0’만 다뤄서 (a ≠ 0, b = 0), (a = 0, b ≠ 0) 두 경우를 놓쳤다.',
   fix:'세 경우(a ≠ 0이고 b = 0 / a = 0이고 b ≠ 0 / a ≠ 0이고 b ≠ 0) 모두 a² + b² > 0이 되어 가정에 모순이다. 따라서 a = 0이고 b = 0이다.',
-  key:'오류는 1번 줄이다. 결론 ‘a = 0이고 b = 0’의 부정은 ‘a ≠ 0 또는 b ≠ 0’인데 괴도는 ‘a ≠ 0이고 b ≠ 0’으로 부정해서 (a ≠ 0, b = 0), (a = 0, b ≠ 0) 두 경우를 놓쳤다. 올바른 증명은 세 경우로 나눠 모두 a² + b² > 0임을 보여 모순을 이끈다.\n기준 point: 1번 줄(결론을 부정한 줄)을 틀렸다고 지목.\n기준 reason: ‘그리고’의 부정은 ‘또는’이라는 설명, 또는 괴도가 놓친 경우(예: a=1, b=0)를 구체적으로 제시.\n기준 fix: 결론의 부정을 ‘a ≠ 0 또는 b ≠ 0’으로 고치거나, 세 경우로 나눠 증명해야 한다고 제시.',
   local:{reason:/(또는|하나만|한\s*경우|경우를?\s*(놓|빠)|빠졌|놓쳤|b\s*=\s*0|a\s*=\s*0)/, fix:/(세\s*가지|3\s*가지|세\s*경우|3\s*경우|경우를?\s*나누|경우로\s*나누|0이\s*아니거나|≠\s*0\s*또는)/,
    onPoint:'1번 줄? 결론을 정직하게 부정했을 뿐인데, 뭐가 문제라는 거지?',
    onReason:'으윽… 내가 놓친 경우가 있다고? 그럼 어떻게 고칠 셈이지?',
@@ -473,7 +469,8 @@ const CASES = {
 /* ---------- 상태 ---------- */
 const S = { voice:true, sound:true, ctx:null, sample:null };
 let P = null;   // 퍼즐 상태
-let G = { team:'1', members:['','','',''], solved:{}, report:null };  // 모둠 상태
+let G = { team:'1', members:['','','',''], solved:{}, report:null };
+let CASE_TARGET = null;  // 모둠 상태
 let C = null;   // 사건 진행 상태
 const app = document.getElementById('app');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -556,16 +553,17 @@ function renderHome(){
   '<div class="files">'+
    '<button class="file" data-go="race"><span class="num">1</span><span><span class="when">개인 · 워밍업</span><br><span class="what">삼단논법 게임</span><br><span class="how">단서를 이어 런닝맨 달리기 게임의 순위를 밝혀라</span></span><span class="muted">시작</span></button>'+
    '<button class="file" data-go="prev"><span class="num">2</span><span><span class="when">이전 차시 · 개인 연습</span><br><span class="what">퍼즐 1, 2, 3</span><br><span class="how">n²이 홀수이면 n도 홀수 / n²이 3의 배수이면 n도 3의 배수 / 1 + √2는 유리수가 아니다</span></span><span class="muted">시작</span></button>'+
-   '<button class="file" data-go="open"><span class="num">3</span><span><span class="when">개인</span><br><span class="what">퍼즐 4, 5</span><br><span class="how">a² + b² = c²이면 a, b, c 중 적어도 하나는 짝수 / ab < 9이면 a < 3 또는 b < 3</span></span><span class="muted">시작</span></button>'+
-   '<button class="file gold" data-go="cases"><span class="num">4</span><span><span class="when">모둠 (대표 기기 1대)</span><br><span class="what">괴도 프루프 사건 1, 2</span><br><span class="how">괴도와 대화하며 증명의 함정을 밝혀 자백을 받아 내기</span></span><span class="muted">시작</span></button>'+
-   '<button class="file" data-go="ads"><span class="num">5</span><span><span class="when">개인 · 확장 활동</span><br><span class="what">괴도의 광고 회사</span><br><span class="how">광고와 말 속에 숨은 역과 대우를 찾아 판정하라</span></span><span class="muted">시작</span></button>'+
+   '<button class="file" data-go="open"><span class="num">3</span><span><span class="when">팀별 활동 (명제의 증명 복습)</span><br><span class="what">퍼즐 4, 5</span><br><span class="how">a² + b² = c²이면 a, b, c 중 적어도 하나는 짝수 / √3은 무리수이다</span></span><span class="muted">시작</span></button>'+
+   '<button class="file" data-go="ads"><span class="num">4</span><span><span class="when">팀별 활동 (명제의 역과 대우 복습)</span><br><span class="what">괴도의 광고 회사</span><br><span class="how">광고와 말 속에 숨은 역과 대우를 찾아 판정하라</span></span><span class="muted">시작</span></button>'+
+   '<button class="file gold" data-go="case1"><span class="num">5</span><span><span class="when">모둠 (대표 기기 1대) · 대우</span><br><span class="what">괴도 프루프 사건 1 · 엇갈린 짝</span><br><span class="how">m, n이 서로소이면 m 또는 n은 홀수 · 괴도의 증명 속 함정을 밝혀 자백을 받아 내기</span></span><span class="muted">시작</span></button>'+
+   '<button class="file gold" data-go="case2"><span class="num">6</span><span><span class="when">모둠 (대표 기기 1대) · 귀류법</span><br><span class="what">괴도 프루프 사건 2 · 사라진 경우</span><br><span class="how">a² + b² = 0이면 a = 0이고 b = 0 · 괴도가 놓친 경우를 찾아 자백을 받아 내기</span></span><span class="muted">시작</span></button>'+
   '</div>';
-  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ ac(); const g=b.dataset.go; if(g==='cases') go('team'); else if(g==='race') withSid(startRace); else if(g==='ads') withSid(startAds); else withSid(()=>go('session',g)); });
+  app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ ac(); const g=b.dataset.go; if(g==='cases'){ CASE_TARGET=null; go('team'); } else if(g==='case1'||g==='case2'){ CASE_TARGET=g==='case1'?'c1':'c2'; go('team'); } else if(g==='race') withSid(startRace); else if(g==='ads') withSid(startAds); else withSid(()=>go('session',g)); });
   app.insertAdjacentHTML('beforeend', homeFooter()); bindHomeFooter();
 }
 
 /* ---------- 구글 설문지 제출 ---------- */
-const FORM_PREFILL_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScPqzyvBG80yNH592ATs0sUOL0BBxMFtTVAHWPzWYxDzmCOcA/viewform?usp=pp_url&entry.120107228=AAA&entry.933032632=BBB'; // 구글 설문지 '미리 채워진 링크' (학번 칸 AAA, 기록 칸 BBB)
+const FORM_PREFILL_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSd1PktguFs5NE2Hy_mRgLhNC6UxHgBrP7HEdc6kcrwxvzBpxA/viewform?usp=pp_url&entry.1628050005=AAA&entry.1394340957=BBB'; // 구글 설문지 '미리 채워진 링크' (학번 칸 AAA, 기록 칸 BBB)
 function formCfg(){ const u=store.get('pd_form')||FORM_PREFILL_URL; if(!u) return null;
   try{ const url=new URL(u); let sk=null, rk=null;
     url.searchParams.forEach((v,k)=>{ if(!/^entry\./.test(k)) return; const x=v.trim().toUpperCase(); if(x==='AAA') sk=k; else if(x==='BBB') rk=k; });
@@ -605,7 +603,7 @@ function bindHomeFooter(){
 }
 function raceText(){ return '[삼단논법 게임] '+stamp()+'\n단서 확인 횟수: '+R.attempts+'회\n대우 도전: '+(R.cdone?'성공 (고르기 '+(R.cTries||1)+'회 만에)':'미완료'); }
 function puzzleText(){ return '['+(P.sess==='prev'?'퍼즐 1, 2, 3':'퍼즐 4, 5')+'] '+stamp()+'\n\n'+P.records.map(r=>r.label+' · '+r.strat+'\n- 내 설명: '+clip(r.why,200)+'\n- 제출 '+r.attempts+'회 · 힌트 '+r.hints+'회'+(r.traps.length?' · 걸린 함정: '+r.traps.map(t=>'“'+clip(t,40)+'”').join(', '):'')+'\n- 한 줄 정리: '+clip(r.summary,200)).join('\n\n'); }
-function adsText(){ return '[괴도의 광고 회사] '+stamp()+'\n첫 판정 점수: '+A.score+' / '+(ADS.length*2)+'\n'+A.log.map((x,i)=>'문장 '+(i+1)+' ('+x.type+'): '+(x.rel&&x.ver?'정확':'첫 판정 틀림')).join('\n')+((A.counters&&A.counters.length)?'\n\n내가 쓴 반례\n'+A.counters.map(c=>'- 문장 '+c.n+' (반례 고르기 '+c.tries+'번 만에): '+clip(c.text,150)).join('\n'):''); }
+function adsText(){ return '[괴도의 광고 회사] '+stamp()+'\n첫 판정 점수: '+A.score+' / '+(ADS.length*2)+'\n'+A.log.map((x,i)=>'문장 '+(i+1)+' ('+x.type+'): '+(x.rel&&x.ver?'정확':'첫 판정 틀림')).join('\n')+((A.counters&&A.counters.length)?'\n\n내가 쓴 반례\n'+A.counters.map(c=>'- 문장 '+c.n+' ('+c.tries+'번째 제출에 인정): '+clip(c.text,150)).join('\n'):''); }
 function bonusText(){ const b=A.bonus; return '[광고 회사 보너스] '+stamp()+'\n광고: '+clip(b.ad,120)+'\n내 판단: '+A.bRel+' / 괴도 해설: '+b.type+'\n내가 쓴 글: '+clip(A.bTxt,150)+'\n해설 검토: '+(A.bAgree==='ok'?'맞는 것 같다':'이상한 데가 있다')+' · '+clip(A.bWhy,150); }
 function caseText(){ return '[괴도 프루프 사건] '+stamp()+'\n모둠원: '+members().join(', ')+'\n'+['c1','c2'].map(k=>{ const v=G.solved[k]; return '사건 '+CASES[k].no+': '+(v?'심문 '+v.count+'회'+(v.keyLine?' · 결정적 한 마디('+v.keyLine.name+'): '+clip(v.keyLine.text,120):''):'도전 중'); }).join('\n')+(G.report?'\n\n'+reportText():''); }
 
@@ -789,19 +787,19 @@ function bindRace(){
 /* ---------- 괴도의 광고 회사 (역·대우) ---------- */
 const ADS=[
  {fact:'비가 오면 운동회는 취소된다.', claim:'운동회가 취소됐네. 그럼 비가 왔겠군!', type:'역',
-  why:'괴도의 말은 ‘운동회가 취소되면 비가 왔다’, 즉 역이에요. 원래 문장은 비가 올 때의 일만 말해 줄 뿐, 취소되는 이유가 비뿐이라고는 하지 않아요.', counter:'미세먼지가 심해서 운동회가 취소됐다.', ce:[{t:'비는 오지 않았는데, 미세먼지 때문에 운동회가 취소됐다.',k:'ok'},{t:'비가 와서 운동회가 취소됐다.',k:'match'},{t:'비가 왔는데도 운동회가 열렸다.',k:'break'},{t:'비가 오지 않아서 운동회가 열렸다.',k:'idle'}]},
+  why:'괴도의 말은 ‘운동회가 취소되면 비가 왔다’, 즉 역이에요. 원래 문장은 비가 올 때의 일만 말해 줄 뿐, 취소되는 이유가 비뿐이라고는 하지 않아요.', counter:'미세먼지가 심해서 운동회가 취소됐다.', cx:{q:/(취소|열리지\s*않|못\s*열|안\s*열)/, qMsg:'반례가 되려면 운동회가 취소된 상황이어야 해요. 괴도의 말 앞부분 ‘운동회가 취소됐다’가 일어난 상황을 만들어 보세요.', pAff:/비(가|는)?\s*(와서|왔|오니|오는\s*바람|때문)/, pNeg:/비(가|는)?\s*(안|오지\s*않|안\s*와|안\s*왔|하나도|전혀)|맑/, pAffMsg:'비 때문에 취소된 거라면 괴도의 말이 맞아요. 비가 아닌 다른 이유로 취소된 상황을 만들어 보세요.', needReason:true, reasonMsg:'운동회가 왜 취소됐는지, 비가 아닌 이유를 함께 써 주세요.', hint:'운동회가 취소될 수 있는 다른 이유를 떠올려 보세요. 예: ○○ 때문에 운동회가 취소됐다. (그날 비는 오지 않았다)'}, ce:[{t:'비는 오지 않았는데, 미세먼지 때문에 운동회가 취소됐다.',k:'ok'},{t:'비가 와서 운동회가 취소됐다.',k:'match'},{t:'비가 왔는데도 운동회가 열렸다.',k:'break'},{t:'비가 오지 않아서 운동회가 열렸다.',k:'idle'}]},
  {fact:'비가 오면 운동회는 취소된다.', claim:'운동회가 열렸다면, 그날 비는 오지 않았던 거지.', type:'대우',
   why:'‘운동회가 취소되지 않았으면 비가 오지 않았다’는 대우예요. 원래 문장이 참이면 대우도 항상 참이에요.'},
  {fact:'지각한 학생은 벌점을 받는다.', claim:'민수가 벌점을 받았으니, 분명 지각했을 거야.', type:'역',
-  why:'‘벌점을 받았으면 지각했다’는 역이에요. 벌점을 받는 이유가 지각 하나뿐이라는 말은 원래 문장에 없어요.', counter:'민수는 청소 당번을 빼먹어서 벌점을 받았다.', ce:[{t:'민수는 지각하지 않았지만, 청소를 빼먹어서 벌점을 받았다.',k:'ok'},{t:'민수는 지각해서 벌점을 받았다.',k:'match'},{t:'민수는 지각했지만 벌점을 받지 않았다.',k:'break'},{t:'민수는 지각도 하지 않았고 벌점도 받지 않았다.',k:'idle'}]},
+  why:'‘벌점을 받았으면 지각했다’는 역이에요. 벌점을 받는 이유가 지각 하나뿐이라는 말은 원래 문장에 없어요.', counter:'민수는 청소 당번을 빼먹어서 벌점을 받았다.', cx:{q:/벌점(을|도)?\s*(받았|받게|받음|받은|먹었|맞았)/, qMsg:'반례가 되려면 민수가 벌점을 받은 상황이어야 해요.', pAff:/지각(해서|했|때문|을\s*해|으로)/, pNeg:/지각(은|을|도)?\s*(안|하지\s*않|안\s*했)|지각하지/, pAffMsg:'지각 때문에 벌점을 받은 거라면 괴도의 말이 맞아요. 지각이 아닌 다른 이유로 벌점을 받은 상황을 만들어 보세요.', needReason:true, reasonMsg:'민수가 왜 벌점을 받았는지, 지각이 아닌 이유를 함께 써 주세요.', hint:'벌점을 받을 수 있는 다른 이유를 떠올려 보세요. 예: 민수는 지각하지 않았지만 ○○해서 벌점을 받았다.'}, ce:[{t:'민수는 지각하지 않았지만, 청소를 빼먹어서 벌점을 받았다.',k:'ok'},{t:'민수는 지각해서 벌점을 받았다.',k:'match'},{t:'민수는 지각했지만 벌점을 받지 않았다.',k:'break'},{t:'민수는 지각도 하지 않았고 벌점도 받지 않았다.',k:'idle'}]},
  {fact:'우리 학교 학생은 교복을 입는다.', claim:'교복을 안 입은 저 사람은 우리 학교 학생이 아니야.', type:'대우',
   why:'‘교복을 입지 않았으면 우리 학교 학생이 아니다’는 대우예요. 원래 문장이 참이라면 확실히 참이에요.'},
  {fact:'우리 학원 합격생은 모두 이 교재로 공부했다.', claim:'이 교재로 공부하면, 당신도 합격!', type:'역', ad:true,
-  why:'‘이 교재로 공부하면 합격한다’는 역이에요. 게다가 학원생 대부분이 이 교재를 쓴다면, 합격생이 이 교재를 쓴 건 당연한 일이기도 해요.', counter:'이 교재로 열심히 공부했지만 불합격한 학생이 있다.', ce:[{t:'이 교재로 공부했지만 불합격한 학생이 있다.',k:'ok'},{t:'이 교재로 공부해서 합격한 학생이 있다.',k:'match'},{t:'이 교재 없이 공부해서 합격한 학원생이 있다.',k:'break'},{t:'이 교재 없이 공부해서 불합격한 학생이 있다.',k:'idle'}]},
+  why:'‘이 교재로 공부하면 합격한다’는 역이에요. 게다가 학원생 대부분이 이 교재를 쓴다면, 합격생이 이 교재를 쓴 건 당연한 일이기도 해요.', counter:'이 교재로 열심히 공부했지만 불합격한 학생이 있다.', cx:{q:/(교재|이\s*책)/, qMsg:'반례가 되려면 이 교재로 공부한 사람이 나와야 해요.', idle:/(교재|책)(\s*(을|를))?\s*(없이|안\s*보|안\s*쓰|쓰지\s*않|보지\s*않)/, idleMsg:'이 교재로 공부하지 않은 상황이면 괴도의 말을 시험할 수 없어요. 이 교재로 공부한 사람이 나와야 해요.', notP:/(불합격|떨어|탈락|못\s*붙|붙지\s*못|합격하지\s*못|합격\s*못|낙방)/, notPMsg:'반례가 되려면 이 교재로 공부했는데도 합격하지 못한 상황이어야 해요.', hint:'예: ○○는 이 교재로 열심히 공부했지만 ○○했다.'}, ce:[{t:'이 교재로 공부했지만 불합격한 학생이 있다.',k:'ok'},{t:'이 교재로 공부해서 합격한 학생이 있다.',k:'match'},{t:'이 교재 없이 공부해서 합격한 학원생이 있다.',k:'break'},{t:'이 교재 없이 공부해서 불합격한 학생이 있다.',k:'idle'}]},
  {fact:'이 놀이기구를 탄 사람은 키가 140cm 이상이다.', claim:'키가 130cm인 지우는 이 놀이기구를 타지 않았어.', type:'대우',
   why:'‘키가 140cm 이상이 아니면 이 놀이기구를 타지 않았다’는 대우예요. 지우는 140cm 이상이 아니니 확실히 타지 않았어요.'},
  {fact:'인기 유튜버들은 모두 이 카메라를 쓴다.', claim:'이 카메라만 사면, 너도 인기 유튜버!', type:'역', ad:true,
-  why:'‘이 카메라를 쓰면 인기 유튜버다’는 역이에요. 카메라가 인기를 만들어 준다는 근거는 원래 문장에 없어요.', counter:'이 카메라를 샀지만 구독자가 거의 없는 유튜버가 있다.', ce:[{t:'이 카메라를 쓰지만 구독자가 거의 없는 유튜버가 있다.',k:'ok'},{t:'이 카메라를 쓰는 인기 유튜버가 있다.',k:'match'},{t:'다른 카메라를 쓰는 인기 유튜버가 있다.',k:'break'},{t:'다른 카메라를 쓰는 인기 없는 유튜버가 있다.',k:'idle'}]},
+  why:'‘이 카메라를 쓰면 인기 유튜버다’는 역이에요. 카메라가 인기를 만들어 준다는 근거는 원래 문장에 없어요.', counter:'이 카메라를 샀지만 구독자가 거의 없는 유튜버가 있다.', cx:{q:/카메라/, qMsg:'반례가 되려면 이 카메라를 쓰는 사람이 나와야 해요.', idle:/(다른\s*카메라|카메라(\s*(를|을))?\s*(없이|안\s*쓰|쓰지\s*않|안\s*사|사지\s*않))/, idleMsg:'이 카메라를 쓰지 않은 상황이면 괴도의 말을 시험할 수 없어요. 이 카메라를 쓰는 사람이 나와야 해요.', notP:/(인기\s*(가|는)?\s*(없|적)|구독자\s*(가|는)?\s*(적|없|거의|몇|별로|\d+\s*명)|\d+\s*명\s*(뿐|밖에)|조회\s*수?\s*(가|는)?\s*(적|낮|안\s*나|별로)|유명하지\s*않|안\s*유명|무명)/, notPMsg:'반례가 되려면 이 카메라를 쓰는데도 인기 유튜버가 아닌 상황이어야 해요.', hint:'예: ○○는 이 카메라로 영상을 찍지만 구독자가 ○명뿐이다.'}, ce:[{t:'이 카메라를 쓰지만 구독자가 거의 없는 유튜버가 있다.',k:'ok'},{t:'이 카메라를 쓰는 인기 유튜버가 있다.',k:'match'},{t:'다른 카메라를 쓰는 인기 유튜버가 있다.',k:'break'},{t:'다른 카메라를 쓰는 인기 없는 유튜버가 있다.',k:'idle'}]},
  {fact:'이번 대회 1등 선수들은 모두 이 에너지 음료를 마셨다.', claim:'이번 대회에서 이 음료를 안 마신 선수는 1등을 하지 못했다.', type:'대우', ad:true,
   why:'광고처럼 들리지만 논리는 맞아요. ‘1등이면 음료를 마셨다’의 대우 ‘음료를 마시지 않았으면 1등이 아니다’예요. 다만 이 말이 ‘음료를 마시면 1등을 한다’는 뜻은 아니에요. 그게 이 광고의 진짜 함정이에요.'}
 ];
@@ -836,6 +834,16 @@ async function checkCounter(fact, claim, t){
   }catch(e){ if(e&&e.code==='not_granted'){ S.sample=null; setBadge(); } }
   return {ok:true,msg:'반례로 인정할게요.'};
 }
+function localCounter(it,t){
+  const x=it.cx; if(!x) return {ok:true};
+  const s2=String(t).replace(/\s+/g,' ');
+  if(!x.q.test(s2)) return {ok:false,msg:x.qMsg};
+  if(x.idle && x.idle.test(s2)) return {ok:false,msg:x.idleMsg};
+  if(x.notP && !x.notP.test(s2)) return {ok:false,msg:x.notPMsg};
+  if(x.pAff && x.pAff.test(s2) && !(x.pNeg && x.pNeg.test(s2))) return {ok:false,msg:x.pAffMsg};
+  if(x.needReason && !(/(때문|해서|라서|으로|로 인해|탓|이유|여서|이어서)/.test(s2) || (x.pNeg && x.pNeg.test(s2)))) return {ok:false,msg:x.reasonMsg};
+  return {ok:true};
+}
 function renderAdsPlay(){
   const it=ADS[A.i], ok=A.checked, relOK=A.rel===it.type, verOK=A.ver===adsVerdict(it);
   const relBtn=k=>{ let c=''; if(ok){ if(k===it.type) c='right'; else if(k===A.rel) c='wrong'; } else if(A.wrongRel && k===A.rel) c='wrong'; return '<button data-rel="'+k+'" aria-pressed="'+(A.rel===k)+'" class="'+c+'" '+(ok?'disabled':'')+'>'+REL_LABEL[k]+'</button>'; };
@@ -853,18 +861,12 @@ function renderAdsPlay(){
   else {
     h+='<div class="fb good"><strong>'+(A.tries>1?'다시 생각해서 맞혔어요! ('+A.tries+'번째 판정)':'정확한 판정이에요!')+'</strong><br>'+esc(it.why)+'</div>';
     if(adsVerdict(it)==='모름'){
-      if(!A.ceOrder) A.ceOrder=shuffle(it.ce.map((x,k)=>k));
-      h+='<div class="qlabel">3. 어떤 상황이 괴도를 반박하는 반례일까?</div><p class="muted" style="font-size:14px;margin:2px 0 6px">확실한 사실은 그대로 지키면서, 괴도의 말만 틀리게 만드는 상황을 고르세요.</p>';
-      h+=A.ceOrder.map(k=>{ const o=it.ce[k]; let c=''; if(A.ceOK && o.k==='ok') c=' style="border-color:var(--ok);background:var(--ok-soft)"'; else if((A.ceWrong||[]).includes(k)) c=' style="border-color:var(--red);background:var(--red-soft)"';
-        return '<button class="cardbtn" data-ce="'+k+'"'+c+' '+(A.ceOK||(A.ceWrong||[]).includes(k)?'disabled':'')+'>'+esc(o.t)+'</button>'; }).join('<div style="height:8px"></div>');
-      if(A.ceFb) h+='<div class="fb '+(A.ceOK?'good':'bad')+'">'+esc(A.ceFb)+'</div>';
-      if(A.ceOK){
-        h+='<label class="qlabel" for="cnt" style="display:block">4. 위의 보기와 다른, 나만의 반례를 만들어 써 보세요</label><p class="muted" style="font-size:14px;margin:2px 0 6px">방금 고른 반례처럼, 사실 문장은 지키고 괴도의 말만 틀리는 새 상황을 만들어요.</p>'+
-          '<textarea id="cnt" placeholder="예: ○○ 때문에 ○○했다" '+(A.cntDone||A.busy?'disabled':'')+'>'+esc(A.cnt)+'</textarea>';
-        if(A.cntFb) h+='<div class="fb '+(A.cntDone?'good':'bad')+'">'+esc(A.cntFb)+'</div>';
-        if(!A.cntDone) h+='<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="cntBtn" '+(A.busy||!A.cnt.trim()?'disabled':'')+'>'+(A.busy?'확인하는 중…':'반례 제출')+'</button><span class="muted" style="font-size:14px">나만의 반례를 써야 다음으로 넘어갈 수 있어요.</span></div>';
-        else h+='<div class="fb hint"><strong>예시 반례</strong><br>'+esc(it.counter)+'</div>';
-      }
+      h+='<label class="qlabel" for="cnt" style="display:block">3. 나만의 반례를 만들어 써 보세요</label><p class="muted" style="font-size:14px;margin:2px 0 6px">사실 문장은 그대로 참이면서, 괴도의 말만 틀리는 상황을 하나 만들어요.</p>'+
+        '<textarea id="cnt" placeholder="예: ○○ 때문에 ○○했다" '+(A.cntDone||A.busy?'disabled':'')+'>'+esc(A.cnt)+'</textarea>';
+      if(A.cntFb) h+='<div class="fb '+(A.cntDone?'good':'bad')+'">'+esc(A.cntFb)+'</div>';
+      if(!A.cntDone && (A.cntTries||0)>=2 && it.cx) h+='<div class="fb hint"><strong>힌트</strong><br>'+esc(it.cx.hint)+'</div>';
+      if(!A.cntDone) h+='<div class="row" style="margin-top:10px"><button class="btn btn-primary" id="cntBtn" '+(A.busy||!A.cnt.trim()?'disabled':'')+'>'+(A.busy?'확인하는 중…':(A.cntTries?'다시 제출':'반례 제출'))+'</button><span class="muted" style="font-size:14px">반례가 인정되어야 다음으로 넘어갈 수 있어요.</span></div>';
+      else h+='<div class="fb hint"><strong>예시 반례</strong><br>'+esc(it.counter)+'</div>';
     }
     if(adsVerdict(it)==='참' || A.cntDone) h+='<div class="row" style="margin-top:14px"><button class="btn btn-primary btn-big" id="adNext">'+(A.i<ADS.length-1?'다음 문장':'결과 보기')+'</button></div>';
   }
@@ -889,18 +891,16 @@ function renderAdsPlay(){
     }
     const lines=good?['크윽, 들켰군!','제법인걸…','이 정도는 눈치채는군.']:['후후, 속았군!','내 말솜씨에 넘어갔군.','다시 잘 읽어 보시지.'];
     renderAds(); speak(lines[A.i%3]); };
-  app.querySelectorAll('[data-ce]').forEach(b=>b.onclick=()=>{ const k=+b.dataset.ce, o=it.ce[k]; A.ceTries=(A.ceTries||0)+1;
-    if(o.k==='ok'){ A.ceOK=true; A.ceFb='맞아요! 사실 문장은 그대로 참이고, 괴도의 말만 틀리는 상황이에요.'; sfx.chime(); speak('크윽, 그런 경우가 있었군!'); }
-    else { (A.ceWrong=A.ceWrong||[]).push(k); A.ceFb=({match:'이 상황에서는 괴도의 말이 맞아요. 괴도의 말이 틀리는 상황을 찾아야 해요.', break:'이 상황은 확실한 사실 문장이 깨져요. 반례는 사실 문장은 지키면서 괴도의 말만 틀리게 해야 해요.', idle:'이 상황은 괴도의 말 앞부분(가정)부터 맞지 않아서, 괴도의 말이 맞는지 틀리는지 시험할 수 없어요.'})[o.k]; sfx.buzz(); }
-    renderAds(); });
   if($('#cnt')) $('#cnt').oninput=e=>{ A.cnt=e.target.value; const b=$('#cntBtn'); if(b) b.disabled=!A.cnt.trim(); };
   if($('#cntBtn')) $('#cntBtn').onclick=async()=>{
     A.busy=true; renderAds();
-    const norm=z=>String(z||'').replace(/[\s.,!?‘’'"]/g,''); const same=(it.ce||[]).some(o=>norm(o.t)===norm(A.cnt));
-    const r=same?{ok:false,msg:'보기를 그대로 쓰지 말고, 나만의 새 상황을 만들어 보세요.'}:await checkCounter(it.fact,it.claim,A.cnt);
-    A.busy=false; A.cntFb=r.msg; if(r.ok){ A.cntDone=true; (A.counters=A.counters||[]).push({n:A.i+1,text:A.cnt,tries:A.ceTries||1}); sfx.chime(); } else { sfx.buzz(); if(!A.cntFb) A.cntFb='괴도의 말이 틀리는 상황인지 다시 확인해 보세요.'; }
+    A.cntTries=(A.cntTries||0)+1;
+    const base=basicText(A.cnt,it.fact,it.claim);
+    const loc=base?{ok:false,msg:base}:localCounter(it,A.cnt);
+    const r=loc.ok?await checkCounter(it.fact,it.claim,A.cnt):loc;
+    A.busy=false; A.cntFb=r.msg; if(r.ok){ A.cntDone=true; if(!A.cntFb||A.cntFb==='반례로 인정할게요.') A.cntFb='반례로 인정! 사실 문장은 지키면서 괴도의 말만 무너뜨렸어요.'; (A.counters=A.counters||[]).push({n:A.i+1,text:A.cnt,tries:A.cntTries}); sfx.chime(); speak('크윽, 그런 경우가 있었군!'); } else { sfx.buzz(); if(!A.cntFb) A.cntFb='괴도의 말이 틀리는 상황인지 다시 확인해 보세요.'; if(A.cntTries===1 && it.cx) A.cntFb+=' 한 번 더 틀리면 힌트가 나와요.'; }
     renderAds(); };
-  if($('#adNext')) $('#adNext').onclick=()=>{ if(A.i<ADS.length-1){ A.i++; A.rel=null; A.ver=null; A.checked=false; A.cnt=''; A.cntDone=false; A.cntFb=''; A.busy=false; A.tries=0; A.wrongRel=false; A.wrongVer=false; A.retryMsg=''; A.ceOrder=null; A.ceOK=false; A.ceWrong=[]; A.ceFb=''; A.ceTries=0; window.scrollTo(0,0); renderAds(); } else { A.phase='end'; window.scrollTo(0,0); renderAds(); } };
+  if($('#adNext')) $('#adNext').onclick=()=>{ if(A.i<ADS.length-1){ A.i++; A.rel=null; A.ver=null; A.checked=false; A.cnt=''; A.cntDone=false; A.cntFb=''; A.busy=false; A.tries=0; A.wrongRel=false; A.wrongVer=false; A.retryMsg=''; A.cntTries=0; window.scrollTo(0,0); renderAds(); } else { A.phase='end'; window.scrollTo(0,0); renderAds(); } };
 }
 function renderAdsEnd(){
   const by=t=>{ const xs=A.log.filter(x=>x.type===t); return xs.filter(x=>x.rel&&x.ver).length+' / '+xs.length; };
@@ -1088,13 +1088,13 @@ function renderTeam(){
    '<div style="font-weight:600">모둠원 이름</div><div id="mem" style="display:grid;gap:8px;margin-top:6px">'+
    G.members.map((m,i)=>'<div class="row" style="flex-wrap:nowrap"><input type="text" data-m="'+i+'" value="'+esc(m)+'" placeholder="'+(i+1)+'번째 모둠원" aria-label="'+(i+1)+'번째 모둠원 이름">'+(G.members.length>2?'<button class="btn" data-rm="'+i+'" aria-label="삭제" style="min-width:46px;padding:0">✕</button>':'')+'</div>').join('')+'</div>'+
    '<div class="row" style="margin-top:10px"><button class="btn" id="addM" '+(G.members.length>=6?'disabled':'')+'>모둠원 추가</button></div>'+
-   '<div class="row" style="margin-top:18px"><button class="btn btn-gold btn-big" id="toHub">사건 파일 열기</button><button class="btn" id="resetG">새 수업 시작 (기록 지우기)</button></div><p class="notice" id="teamErr"></p></section>';
+   '<div class="row" style="margin-top:18px"><button class="btn btn-gold btn-big" id="toHub">'+(CASE_TARGET?'사건 '+(CASE_TARGET==='c1'?1:2)+' 시작':'사건 파일 열기')+'</button><button class="btn" id="resetG">새 수업 시작 (기록 지우기)</button></div><p class="notice" id="teamErr"></p></section>';
   app.innerHTML=h;
   app.querySelector('#team').onchange=e=>G.team=e.target.value;
   app.querySelectorAll('[data-m]').forEach(inp=>inp.oninput=()=>G.members[+inp.dataset.m]=inp.value);
   app.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{ G.members.splice(+b.dataset.rm,1); renderTeam(); });
   app.querySelector('#addM').onclick=()=>{ G.members.push(''); renderTeam(); };
-  app.querySelector('#toHub').onclick=()=>{ if(G.members.filter(m=>m.trim()).length<2){ app.querySelector('#teamErr').textContent='모둠원 이름을 두 명 이상 적어 주세요.'; return; } saveG(); go('hub'); };
+  app.querySelector('#toHub').onclick=()=>{ if(G.members.filter(m=>m.trim()).length<2){ app.querySelector('#teamErr').textContent='모둠원 이름을 두 명 이상 적어 주세요.'; return; } saveG(); if(CASE_TARGET){ const t=CASE_TARGET; CASE_TARGET=null; startCase(t); } else go('hub'); };
   app.querySelector('#resetG').onclick=()=>{ if(!confirm('이 기기에 저장된 모둠 이름, 사건 기록, 사건 보고서를 모두 지울까요?')) return; G={team:'1',members:['','','',''],solved:{},report:null}; saveG(); renderTeam(); };
 }
 const members = ()=>G.members.map(m=>m.trim()).filter(Boolean);
@@ -1204,7 +1204,8 @@ function cutscene({kicker, heading, lines, finalStamp}){
 async function startCase(k){
   const c=CASES[k]; ac();
   C={ key:k, phase:'review', gauge:{point:false,reason:false,fix:false}, count:0, turn:0, msgs:[], stall:0, busy:false, usedQ:[], notice:'' };
-  await cutscene({kicker:'사건 파일 '+c.no, heading:c.title, lines:c.intro});
+  const intro = (k==='c2' && !G.solved.c1) ? [{t:'후후후… 또 만났군, 탐정 사무소 여러분.',m:'smug'}].concat(c.intro.slice(1)) : c.intro;
+  await cutscene({kicker:'사건 파일 '+c.no, heading:c.title, lines:intro});
   renderCase();
 }
 function gaugePct(){ return (C.gauge.point?30:0)+(C.gauge.reason?40:0)+(C.gauge.fix?30:0); }
@@ -1279,7 +1280,7 @@ function buildPrompt(c,text,speaker){
   const g=C.gauge;
   return '너는 고등학교 1학년 수학 수업용 추리 게임의 악당 캐릭터 ‘괴도 프루프’다. 학생 모둠이 네가 쓴 틀린 증명을 심문하고 있다.\n\n'+
    '[사건 명제] '+c.statement+'\n[괴도가 쓴 증명 ('+c.method+')]\n'+c.lines.map((l,i)=>(i+1)+'. '+l).join('\n')+'\n\n'+
-   '[비밀 정답과 게이지 기준 — 학생에게 정답을 먼저 말하지 말 것]\n'+c.key+'\n\n'+
+   '[비밀 정답과 게이지 기준 — 학생에게 정답을 먼저 말하지 말 것]\n[[CASE_KEY:'+C.key+']]\n\n'+
    '[이미 충족한 기준] point: '+(g.point?'완료':'미완료')+', reason: '+(g.reason?'완료':'미완료')+', fix: '+(g.fix?'완료':'미완료')+'\n'+
    '[게이지가 오르지 않은 연속 메시지 수] '+C.stall+'\n\n[지금까지의 대화]\n'+(hist||'(없음)')+'\n\n[방금 보낸 학생 메시지] 학생('+speaker+'): '+text+'\n\n'+
    '규칙:\n- 이번 학생 메시지(앞선 대화 맥락 포함)가 새로 충족한 기준만 true로 표시한다. 이미 완료된 기준은 false로 둔다. 한 메시지가 여러 기준을 동시에 충족할 수 있다.\n'+
@@ -1362,6 +1363,7 @@ async function finishCase(){
   else if(t==='ads') withSid(startAds);
   else if(t==='prev'||t==='open') withSid(()=>startSession(t));
   else if(t==='cases') go('team');
+  else if(t==='case1'||t==='case2'){ CASE_TARGET=t==='case1'?'c1':'c2'; go('team'); }
   else go('home');
 })();
 </script>
